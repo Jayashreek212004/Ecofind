@@ -1,6 +1,28 @@
 <?php
 // register.php
 // You can later add PHP code here for form handling
+include 'db.php'; // Add your DB connection file if not already
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirm = $_POST['confirm-password'];
+    if ($password !== $confirm) {
+        echo "<script>alert('Passwords do not match');</script>";
+    } else {
+        // Store password as integer (not recommended, but matches your schema)
+        $password_int = intval($password);
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        $stmt->bind_param("ssi", $username, $email, $password_int);
+        if ($stmt->execute()) {
+            // Registration successful, redirect
+            header("Location: landing.php");
+            exit();
+        } else {
+            echo "<script>alert('Registration failed');</script>";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -144,11 +166,11 @@
   </div>
 
   <div class="container">
+    <div style="position: absolute; top: 20px; right: 30px; z-index: 10;">
+      <a href="landing.php" class="btn btn-secondary" style="font-size:16px;">Back</a>
+    </div>
     <form class="register-form" method="POST" action="">
       <h2>Register your account</h2>
-
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" placeholder="Enter your full name..." required>
 
       <label for="username">Username</label>
       <input type="text" name="username" id="username" placeholder="Enter a username..." required>

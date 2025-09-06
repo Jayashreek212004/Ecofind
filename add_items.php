@@ -1,240 +1,181 @@
 <?php
-// add_items.php — populate sample products
 include 'db.php'; // your database connection
 
-// Make sure user_id = 1 exists in your users table
-// Make sure category_id 1-5 exist in your category table
-$products = [
-    [
-        "user_id" => 1,
-        "title" => "iPhone 12",
-        "category_id" => 1, // Electronics
-        "description" => "Used iPhone 12 with minor scratches",
-        "price" => 450,
-        "quantity" => 1,
-        "condition" => "Good",
-        "year" => 2020,
-        "brand" => "Apple",
-        "model" => "A2172",
-        "dimensions" => "14.7x7.1x0.7 cm",
-        "weight" => "164g",
-        "material" => "Glass/Aluminum",
-        "color" => "Black",
-        "original_packaging" => 1,
-        "manual_included" => 1,
-        "working_condition" => "Fully functional, battery good",
-        "image" => "images/iphone12.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Levi's Jeans",
-        "category_id" => 2, // Clothing
-        "description" => "Blue slim-fit jeans, lightly worn",
-        "price" => 25,
-        "quantity" => 2,
-        "condition" => "Excellent",
-        "year" => 2019,
-        "brand" => "Levi's",
-        "model" => "501",
-        "dimensions" => "100x30x2 cm",
-        "weight" => "500g",
-        "material" => "Denim",
-        "color" => "Blue",
-        "original_packaging" => 0,
-        "manual_included" => 0,
-        "working_condition" => "No defects, zipper smooth",
-        "image" => "images/levis_jeans.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "IKEA Chair",
-        "category_id" => 3, // Furniture
-        "description" => "Wooden chair with cushion, stable",
-        "price" => 35,
-        "quantity" => 1,
-        "condition" => "Good",
-        "year" => 2018,
-        "brand" => "IKEA",
-        "model" => "N/A",
-        "dimensions" => "45x45x90 cm",
-        "weight" => "7kg",
-        "material" => "Wood/Fabric",
-        "color" => "Brown",
-        "original_packaging" => 0,
-        "manual_included" => 0,
-        "working_condition" => "Minor scuffs, stable",
-        "image" => "images/ikea_chair.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Samsung TV 42\"",
-        "category_id" => 1, // Electronics
-        "description" => "LED TV with remote, fully functional",
-        "price" => 220,
-        "quantity" => 1,
-        "condition" => "Good",
-        "year" => 2017,
-        "brand" => "Samsung",
-        "model" => "UA42N5300",
-        "dimensions" => "95x22x55 cm",
-        "weight" => "10kg",
-        "material" => "Plastic/Metal",
-        "color" => "Black",
-        "original_packaging" => 0,
-        "manual_included" => 1,
-        "working_condition" => "Perfect working condition",
-        "image" => "images/samsung_tv42.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Sony Headphones",
-        "category_id" => 1, // Electronics
-        "description" => "Over-ear wireless headphones",
-        "price" => 60,
-        "quantity" => 1,
-        "condition" => "Very Good",
-        "year" => 2021,
-        "brand" => "Sony",
-        "model" => "WH-CH710N",
-        "dimensions" => "18x7x20 cm",
-        "weight" => "250g",
-        "material" => "Plastic/Leather",
-        "color" => "Black",
-        "original_packaging" => 1,
-        "manual_included" => 1,
-        "working_condition" => "No issues, battery fine",
-        "image" => "images/sony_headphones.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Dining Table",
-        "category_id" => 3, // Furniture
-        "description" => "Wooden dining table, seats 4",
-        "price" => 120,
-        "quantity" => 1,
-        "condition" => "Good",
-        "year" => 2016,
-        "brand" => "Local Brand",
-        "model" => "N/A",
-        "dimensions" => "120x80x75 cm",
-        "weight" => "20kg",
-        "material" => "Wood",
-        "color" => "Dark Brown",
-        "original_packaging" => 0,
-        "manual_included" => 0,
-        "working_condition" => "Some scratches, solid",
-        "image" => "images/dining_table.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Canon DSLR",
-        "category_id" => 1, // Electronics
-        "description" => "Canon DSLR with 18-55mm lens",
-        "price" => 350,
-        "quantity" => 1,
-        "condition" => "Excellent",
-        "year" => 2019,
-        "brand" => "Canon",
-        "model" => "EOS 200D",
-        "dimensions" => "13x9x8 cm",
-        "weight" => "450g",
-        "material" => "Plastic/Metal",
-        "color" => "Black",
-        "original_packaging" => 1,
-        "manual_included" => 1,
-        "working_condition" => "Perfect working condition",
-        "image" => "images/canon_dslr.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Nike Sneakers",
-        "category_id" => 2, // Clothing
-        "description" => "Men's running shoes, size 10",
-        "price" => 40,
-        "quantity" => 1,
-        "condition" => "Very Good",
-        "year" => 2020,
-        "brand" => "Nike",
-        "model" => "Air Zoom Pegasus",
-        "dimensions" => "30x10x12 cm",
-        "weight" => "800g",
-        "material" => "Fabric/Rubber",
-        "color" => "White",
-        "original_packaging" => 0,
-        "manual_included" => 0,
-        "working_condition" => "No major wear",
-        "image" => "images/nike_sneakers.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Coffee Maker",
-        "category_id" => 4, // Home Appliances
-        "description" => "Single-serve drip coffee machine",
-        "price" => 25,
-        "quantity" => 1,
-        "condition" => "Good",
-        "year" => 2018,
-        "brand" => "Hamilton Beach",
-        "model" => "N/A",
-        "dimensions" => "20x15x30 cm",
-        "weight" => "2kg",
-        "material" => "Plastic/Metal",
-        "color" => "Black",
-        "original_packaging" => 0,
-        "manual_included" => 1,
-        "working_condition" => "Works fine, no leaks",
-        "image" => "images/coffee_maker.jpg"
-    ],
-    [
-        "user_id" => 1,
-        "title" => "Office Desk Lamp",
-        "category_id" => 5, // Home Decor
-        "description" => "Adjustable LED desk lamp",
-        "price" => 15,
-        "quantity" => 2,
-        "condition" => "Excellent",
-        "year" => 2021,
-        "brand" => "Philips",
-        "model" => "N/A",
-        "dimensions" => "15x15x40 cm",
-        "weight" => "1kg",
-        "material" => "Metal/Plastic",
-        "color" => "Silver",
-        "original_packaging" => 1,
-        "manual_included" => 1,
-        "working_condition" => "Perfectly working",
-        "image" => "images/desk_lamp.jpg"
-    ]
-];
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = 1; // default for now, can change to logged-in user
+    $title = $_POST['title'];
+    $category_id = $_POST['category_id'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $condition = $_POST['condition'];
+    $year = $_POST['year'];
+    $brand = $_POST['brand'];
+    $model = $_POST['model'];
+    $dimensions = $_POST['dimensions'];
+    $weight = $_POST['weight'];
+    $material = $_POST['material'];
+    $color = $_POST['color'];
+    $original_packaging = isset($_POST['original_packaging']) ? 1 : 0;
+    $manual_included = isset($_POST['manual_included']) ? 1 : 0;
+    $working_condition = $_POST['working_condition'];
 
-// Insert products into DB
-foreach($products as $p){
-    $stmt = $conn->prepare("INSERT INTO products (user_id, title, category_id, description, price, quantity, `condition`, year_of_manufacture, brand, model, dimensions, weight, material, color, original_packaging, manual_included, working_condition, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    
-  $stmt->bind_param(
-    "isisisssssssiissss",
-    $p['user_id'],           // i
-    $p['title'],             // s
-    $p['category_id'],       // i
-    $p['description'],       // s
-    $p['price'],             // d
-    $p['quantity'],          // i
-    $p['condition'],         // s
-    $p['year'],              // i
-    $p['brand'],             // s
-    $p['model'],             // s
-    $p['dimensions'],        // s
-    $p['weight'],            // s
-    $p['material'],          // s
-    $p['color'],             // s
-    $p['original_packaging'],// i
-    $p['manual_included'],   // i
-    $p['working_condition'], // s
-    $p['image']              // s
-);
+    // ✅ Handle file upload
+    $image = "images/placeholder.jpg"; 
+    if (!empty($_FILES['image']['name'])) {
+        $target_dir = "images/";
+        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $image = $target_file;
+        }
+    }
 
-    $stmt->execute();
+    // Insert into DB
+    $stmt = $conn->prepare("INSERT INTO products 
+        (user_id, title, category_id, description, price, quantity, `condition`, year_of_manufacture, brand, model, dimensions, weight, material, color, original_packaging, manual_included, working_condition, image) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    );
+
+    $stmt->bind_param(
+        "isisisssssssiissss",
+        $user_id,
+        $title,
+        $category_id,
+        $description,
+        $price,
+        $quantity,
+        $condition,
+        $year,
+        $brand,
+        $model,
+        $dimensions,
+        $weight,
+        $material,
+        $color,
+        $original_packaging,
+        $manual_included,
+        $working_condition,
+        $image
+    );
+
+    if ($stmt->execute()) {
+        echo "<p style='color:green;'>✅ Product added successfully!</p>";
+    } else {
+        echo "<p style='color:red;'>❌ Error: ".$stmt->error."</p>";
+    }
 }
-
-echo "10 sample products added successfully ✅";
 ?>
+
+<h2 style="text-align:center; font-family:Arial, sans-serif; color:#333; margin-bottom:30px;">Add New Product</h2>
+
+<form method="POST" enctype="multipart/form-data" style="
+    max-width:600px; 
+    margin:0 auto; 
+    background:rgba(165, 158, 230, 0.58); 
+    padding:30px; 
+    border-radius:15px; 
+    box-shadow:0 8px 25px rgba(14, 14, 14, 0.1);
+    font-family:Arial,sans-serif;
+">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Title:</label>
+    <input type="text" name="title" required style="
+        width:100%; 
+        padding:10px; 
+        border-radius:8px; 
+        border:1px solid #ccc; 
+        margin-bottom:15px;
+        font-size:14px;
+    ">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Category:</label>
+    <select name="category_id" required style="
+        width:100%; 
+        padding:10px; 
+        border-radius:8px; 
+        border:1px solid #ccc; 
+        margin-bottom:15px;
+        font-size:14px;
+    ">
+        <option value="1">Electronics</option>
+        <option value="2">Clothing</option>
+        <option value="3">Furniture</option>
+        <option value="4">Home Appliances</option>
+        <option value="5">Home Decor</option>
+    </select>
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Description:</label>
+    <textarea name="description" required style="
+        width:100%; 
+        padding:10px; 
+        border-radius:8px; 
+        border:1px solid #ccc; 
+        margin-bottom:15px; 
+        font-size:14px; 
+        resize:vertical;
+    "></textarea>
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Price:</label>
+    <input type="number" step="0.01" name="price" required style="
+        width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;
+    ">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Quantity:</label>
+    <input type="number" name="quantity" required style="
+        width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;
+    ">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Condition:</label>
+    <input type="text" name="condition" required style="
+        width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;
+    ">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Year of Manufacture:</label>
+    <input type="number" name="year" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Brand:</label>
+    <input type="text" name="brand" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Model:</label>
+    <input type="text" name="model" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Dimensions:</label>
+    <input type="text" name="dimensions" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Weight:</label>
+    <input type="text" name="weight" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Material:</label>
+    <input type="text" name="material" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Color:</label>
+    <input type="text" name="color" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="display:block; margin-bottom:10px;">
+        <input type="checkbox" name="original_packaging"> Original Packaging
+    </label>
+    <label style="display:block; margin-bottom:20px;">
+        <input type="checkbox" name="manual_included"> Manual Included
+    </label>
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Working Condition:</label>
+    <input type="text" name="working_condition" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; font-size:14px;">
+
+    <label style="font-weight:bold; margin-bottom:5px; display:block;">Upload Image:</label>
+    <input type="file" name="image" accept="image/*" style="margin-bottom:25px;">
+
+    <button type="submit" style="
+        width:100%; 
+        padding:12px; 
+        background:#007bff; 
+        color:#fff; 
+        border:none; 
+        border-radius:10px; 
+        font-size:16px; 
+        font-weight:bold;
+        cursor:pointer;
+        transition:background 0.3s;
+    " onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#007bff'">➕ Add Product</button>
+
+</form>
